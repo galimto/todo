@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "galimtoTodo",
+    
     "slug": "todo",
     "privacy": "public",
     "sdkVersion": "33.0.0",
