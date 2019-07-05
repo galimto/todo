@@ -1,20 +1,45 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { StyleSheet, Text, View , StatusBar , Dimensions, Platform } from 'react-native';
 const{height,width} = Dimensions.get("window");
-import { TextInput } from 'react-native-gesture-handler';
-
+import { TextInput, ScrollView } from 'react-native-gesture-handler';
+import ToDo from './ToDo';
+import ToDo2 from './components/ToDo';
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <StatusBar barStyle="light-content"></StatusBar>
-      <Text style={styles.title}>galimto's ToDO</Text>
-      <View style={styles.card}>
-		<TextInput style={styles.input} placeholder={"새 잡"}></TextInput>
+ 
+	const [txt, setTxt] = useState("Asdf");
+	return (
+		
+		<View style={styles.container}>
+			<StatusBar barStyle="light-content"></StatusBar>
+			<Text style={styles.title}>galimto's ToDO</Text>
+			<View style={styles.card}>
+			<TextInput style={styles.input} 
+				placeholder={"새 잡"} 
+				placeholderTextColor={"#999"}
+				
+				value={txt} 
+				onChangeText={_controlNewToDo2}
+				returnKeyType={"done"}
+				autoCorrect={false}
+			  ></TextInput>
+				<ScrollView contentContainerStyle={styles.todos}>
+					<ToDo/>
+				</ScrollView>
+				<ScrollView contentContainerStyle={styles.todos}>
+					<ToDo2/>
+				</ScrollView>
+			</View>
+		
 
-      </View>
+		</View>
+	);
+	function _controlNewToDo2(text){
+		setTxt(text);
 
-    </View>
-  );
+	}
+
+ 
+ 
 }
 
 const styles = StyleSheet.create({
@@ -59,6 +84,14 @@ const styles = StyleSheet.create({
 	  
   },
   input:{
+	  padding:20,
+	  borderBottomColor:"#bbb",
+	  borderBottomWidth:1,
+	  fontSize:25
 
+
+  },
+  todos:{
+	  alignItems:"center"
   }
 });
