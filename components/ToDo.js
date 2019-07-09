@@ -1,13 +1,69 @@
-import React  from 'react';
-import {  View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React , {useState}   from 'react';
+import {  View, Text, TouchableOpacity, StyleSheet,Dimensions,Alert,TextInput } from 'react-native';
+const {height, width} = Dimensions.get("window");
 export default function ToDo2() {
     let state={
-        isEditing:false
+        isEditing:false,
+        isCompleted:false
     }
+    const [txt, setTxt] = useState("Asdf");
+    const [isCompleted, setComplted] = useState(false);
     return (
-        <View>
-            <Text>Hello Im toDo.</Text>
-        </View>
+        <View style={styles.container}>
+            <TouchableOpacity onPress={_completeTodoToggle}>
+                <View style={styles.circle} ></View>
+            </TouchableOpacity>
+            <Text style={styles.text} >Hello Im toDo.</Text>
+            <TextInput style={styles.input} 
+				placeholder={"새 잡"} 
+			
+				
+				value={txt}></TextInput>
+        </View> 
+        
     )
+    function _completeTodoToggle(){
+       state.isCompleted = !state.isCompleted
+       setTxt(String(state.isCompleted))
+       setComplted(state.isCompleted)
+    }
+    
 }
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container:{
+        width:width - 50,
+        borderBottomColor:"#bbb",
+        borderBottomWidth:StyleSheet.hairlineWidth,
+        flexDirection:"row" ,
+        alignItems:"center"
+        
+
+        
+    },
+    circle:{
+        width:30,
+        height:30,
+        borderRadius:15,
+        
+        
+        borderWidth:5,
+        marginRight:20
+
+    },
+    text:{
+        fontWeight:"600",
+        fontSize:20,
+        marginVertical:20
+
+
+    },
+    completedCircle:{
+        borderColor:"blue"
+    },
+    uncompletedCircle:{
+        borderColor:"red"
+    }
+    
+})
+
+ 

@@ -23,11 +23,13 @@ export default function App() {
 				autoCorrect={false}
 			  ></TextInput>
 				<ScrollView contentContainerStyle={styles.todos}>
+					<ToDo2/>
 					<ToDo/>
 				</ScrollView>
-				<ScrollView contentContainerStyle={styles.todos}>
-					<ToDo2/>
-				</ScrollView>
+				 
+				 
+			 
+				 
 			</View>
 		
 
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
 	  fontSize:25
 
 
-  },
+  }, 
   todos:{
 	  alignItems:"center"
   }
