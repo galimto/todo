@@ -14,7 +14,7 @@ export default function App() {
 			<Text style={styles.title}>galimto's ToDO</Text>
 			<View style={styles.card}>
 			<TextInput style={styles.input} 
-				placeholder={"새 잡"} 
+				placeholder={"새 Job.. ,, , ,"} 
 				placeholderTextColor={"#999"}
 				
 				value={txt} 
