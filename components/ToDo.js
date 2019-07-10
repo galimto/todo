@@ -2,32 +2,64 @@ import React , {useState}   from 'react';
 import {  View, Text, TouchableOpacity, StyleSheet,Dimensions,Alert,TextInput } from 'react-native';
 const {height, width} = Dimensions.get("window");
 export default function ToDo2() {
-    let state={
+    var state={
         isEditing:false,
         isCompleted:false
     }
     const [txt, setTxt] = useState("Asdf");
-    const [isCompleted, setComplted] = useState(false);
+    const [isCompleted, setComplted] = useState(false , _cc);
+    const [isEditing, setEditing]= useState(true  )
+     
+
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={_completeTodoToggle}>
-                <View style={[styles.circle , isCompleted?styles.completedCircle:styles.uncompletedCircle]} ></View>
-            </TouchableOpacity>
-            <Text style={styles.text} >Hello Im toDo/compo.</Text>
-            <TextInput style={styles.input} 
-				placeholder={"새 잡"} 
-			
-				
-				value={String(isCompleted)}></TextInput>
+            
+                
+                    <View style={styles.column}>
+                        <TouchableOpacity onPress={_completeTodoToggle}>
+                        <View style={[styles.circle , isCompleted?styles.completedCircle:styles.uncompletedCircle]} ></View>
+                        </TouchableOpacity>
+                        <Text style={[styles.text, isCompleted?styles.completedText:styles.uncompletedText]} >Hello Im toDo/compo.{String(isCompleted)},{String(state.isCompleted)}</Text>
+                    </View>
+                    <View style={styles.column}>
+                        {isEditing?(
+                            <View style={styles.actions}>
+                                <TouchableOpacity>
+                                    <View style={styles.actionContainer}>
+                                        <Text style={styles.actionText}>☑</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                        
+
+                        ):(
+                            <View style={styles.actions}>
+                                <TouchableOpacity>
+                                    <View style={styles.actionContainer}>
+                                        <Text style={styles.actionText}>☑</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                    </View>
+
+                    
+                 
+            
+            
         </View> 
         
     )
     function _completeTodoToggle(){
        
-        setComplted(!isCompleted)
-       
+        setComplted(!isCompleted);
+        state.isCompleted = !state.isCompleted;
+
        //setTxt(String(state.isCompleted))
        
+    }
+    function _cc(){
+        alert(1)
     }
     
 }
@@ -64,6 +96,14 @@ const styles = StyleSheet.create({
     },
     uncompletedCircle:{
         borderColor:"red"
+    },
+    completedText:{
+        textDecorationLine:"line-through",
+        fontStyle: 'italic',
+        color:"#bbb"
+    },
+    uncompletedText:{
+
     }
     
 })

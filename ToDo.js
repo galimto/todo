@@ -13,12 +13,8 @@ export default class Todo extends Component{
                 <TouchableOpacity  onPress={this._completeTodoToggle}>
                     <View style={[styles.circle , isCompleted?styles.completedCircle:styles.uncompletedCircle]}  ></View>
                 </TouchableOpacity>
-                <Text style={styles.text}>Hello Im toDo.</Text>
-                <TextInput style={styles.input} 
-				placeholder={"새 잡"} 
-			
-				
-				value={String(isCompleted)}></TextInput>
+                <Text style={[styles.text, isCompleted?styles.completedText:styles.uncompletedText]}>Hello Im toDo.</Text>
+               
             </View>
 
         )
@@ -65,5 +61,12 @@ const styles = StyleSheet.create({
     },
     uncompletedCircle:{
         borderColor:"red"
+    },
+    completedText:{
+        textDecorationLine:"line-through",
+        fontStyle: 'italic'
+    },
+    uncompletedText:{
+
     }
 })
