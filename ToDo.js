@@ -7,15 +7,50 @@ export default class Todo extends Component{
         isCompleted:false
     }
     render(){
-        const {isCompleted}= this.state;
+        const {isCompleted, isEditing}= this.state;
         return(
             <View style={styles.container}>
-                <TouchableOpacity  onPress={this._completeTodoToggle}>
-                    <View style={[styles.circle , isCompleted?styles.completedCircle:styles.uncompletedCircle]}  ></View>
-                </TouchableOpacity>
-                <Text style={[styles.text, isCompleted?styles.completedText:styles.uncompletedText]}>Hello Im toDo.</Text>
-               
-            </View>
+            
+                
+                    <View style={styles.column}>
+                        <TouchableOpacity onPress={this._completeTodoToggle}>
+                        <View style={[styles.circle , isCompleted?styles.completedCircle:styles.uncompletedCircle]} ></View>
+                        </TouchableOpacity>
+                        <Text style={[styles.text, isCompleted?styles.completedText:styles.uncompletedText]} >Hello Im toDo/compo.{String(isCompleted)}</Text>
+                    </View>
+                    <View style={styles.column}>
+                        {isEditing?(
+                            <View style={styles.actions}>
+                                <TouchableOpacity>
+                                    <View style={styles.actionContainer}>
+                                        <Text style={styles.actionText}>☑</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                        
+
+                        ):(
+                            <View style={styles.actions}>
+                                <TouchableOpacity>
+                                    <View style={styles.actionContainer}>
+                                        <Text style={styles.actionText}>✎</Text>
+                                    </View>
+                                </TouchableOpacity>
+                           
+                             <TouchableOpacity>
+                                 <View style={styles.actionContainer}>
+                                     <Text style={styles.actionText}>×</Text>
+                                 </View>
+                             </TouchableOpacity>
+                         </View>
+                        )}
+                    </View>
+
+                    
+                 
+            
+            
+        </View> 
 
         )
         

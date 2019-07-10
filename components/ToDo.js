@@ -7,8 +7,8 @@ export default function ToDo2() {
         isCompleted:false
     }
     const [txt, setTxt] = useState("Asdf");
-    const [isCompleted, setComplted] = useState(false , _cc);
-    const [isEditing, setEditing]= useState(true  )
+    const [isCompleted, setComplted] = useState(false );
+    const [isEditing, setEditing]= useState(false  )
      
 
     return (
@@ -36,10 +36,16 @@ export default function ToDo2() {
                             <View style={styles.actions}>
                                 <TouchableOpacity>
                                     <View style={styles.actionContainer}>
-                                        <Text style={styles.actionText}>☑</Text>
+                                        <Text style={styles.actionText}>✎</Text>
                                     </View>
                                 </TouchableOpacity>
-                            </View>
+                           
+                             <TouchableOpacity>
+                                 <View style={styles.actionContainer}>
+                                     <Text style={styles.actionText}>×</Text>
+                                 </View>
+                             </TouchableOpacity>
+                         </View>
                         )}
                     </View>
 
@@ -104,6 +110,11 @@ const styles = StyleSheet.create({
     },
     uncompletedText:{
 
+    },
+    column:{
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"space-between"
     }
     
 })
