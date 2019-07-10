@@ -11,21 +11,23 @@ export default function ToDo2() {
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={_completeTodoToggle}>
-                <View style={styles.circle} ></View>
+                <View style={[styles.circle , isCompleted?styles.completedCircle:styles.uncompletedCircle]} ></View>
             </TouchableOpacity>
-            <Text style={styles.text} >Hello Im toDo.</Text>
+            <Text style={styles.text} >Hello Im toDo/compo.</Text>
             <TextInput style={styles.input} 
 				placeholder={"새 잡"} 
 			
 				
-				value={txt}></TextInput>
+				value={String(isCompleted)}></TextInput>
         </View> 
         
     )
     function _completeTodoToggle(){
-       state.isCompleted = !state.isCompleted
-       setTxt(String(state.isCompleted))
-       setComplted(state.isCompleted)
+       
+        setComplted(!isCompleted)
+       
+       //setTxt(String(state.isCompleted))
+       
     }
     
 }

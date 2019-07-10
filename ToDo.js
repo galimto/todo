@@ -1,5 +1,5 @@
 import React ,{Component} from "react";
-import {  View, Text, TouchableOpacity, StyleSheet ,Dimensions } from 'react-native';
+import {  View, Text, TouchableOpacity, StyleSheet ,Dimensions,TextInput } from 'react-native';
 const {height, width} = Dimensions.get("window");
 export default class Todo extends Component{
     state={
@@ -10,16 +10,28 @@ export default class Todo extends Component{
         const {isCompleted}= this.state;
         return(
             <View style={styles.container}>
-                <TouchableOpacity>
-                    <View style={(styles.circle , isCompleted?styles.completedCircle:styles.uncompletedCircle)}  ></View>
+                <TouchableOpacity  onPress={this._completeTodoToggle}>
+                    <View style={[styles.circle , isCompleted?styles.completedCircle:styles.uncompletedCircle]}  ></View>
                 </TouchableOpacity>
                 <Text style={styles.text}>Hello Im toDo.</Text>
+                <TextInput style={styles.input} 
+				placeholder={"새 잡"} 
+			
+				
+				value={String(isCompleted)}></TextInput>
             </View>
 
         )
         
 
     }
+    _completeTodoToggle = () => {
+        this.setState(prevState =>{
+            return{
+                isCompleted:!prevState.isCompleted
+            }
+        })
+     }
 }
 const styles = StyleSheet.create({
     container:{
