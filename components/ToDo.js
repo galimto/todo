@@ -1,14 +1,14 @@
 import React , {useState}   from 'react';
 import {  View, Text, TouchableOpacity, StyleSheet,Dimensions,Alert,TextInput } from 'react-native';
-const {height, width} = Dimensions.get("window");
-export default function ToDo2() {
-    var state={
-        isEditing:false,
-        isCompleted:false
-    }
-    const [txt, setTxt] = useState("Asdf");
+const { width,height} = Dimensions.get("window");
+export default function ToDo2(props) {
+    
+
+    const [todoValue, setTodoValue] = useState("");
     const [isCompleted, setComplted] = useState(false );
     const [isEditing, setEditing]= useState(false  )
+    const [text, setText] = useState(props.text);
+    const [text2, setText2] = useState(props.text2);
      
 
     return (
@@ -17,14 +17,15 @@ export default function ToDo2() {
                 
                     <View style={styles.column}>
                         <TouchableOpacity onPress={_completeTodoToggle}>
-                        <View style={[styles.circle , isCompleted?styles.completedCircle:styles.uncompletedCircle]} ></View>
+                            <View style={[styles.circle , isCompleted?styles.completedCircle:styles.uncompletedCircle]} >
+                            </View>
                         </TouchableOpacity>
-                        <Text style={[styles.text, isCompleted?styles.completedText:styles.uncompletedText]} >Hello Im toDo/compo.{String(isCompleted)},{String(state.isCompleted)}</Text>
+                        <Text style={[styles.text, isCompleted?styles.completedText:styles.uncompletedText]} >{text}{text2}  {String(isCompleted)}</Text>
                     </View>
                     <View style={styles.column}>
                         {isEditing?(
                             <View style={styles.actions}>
-                                <TouchableOpacity>
+                                <TouchableOpacity  onPressOut={_endEditing}>
                                     <View style={styles.actionContainer}>
                                         <Text style={styles.actionText}>☑</Text>
                                     </View>
@@ -34,7 +35,7 @@ export default function ToDo2() {
 
                         ):(
                             <View style={styles.actions}>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPressOut={_startEditing}>
                                     <View style={styles.actionContainer}>
                                         <Text style={styles.actionText}>✎</Text>
                                     </View>
@@ -49,10 +50,6 @@ export default function ToDo2() {
                         )}
                     </View>
 
-                    
-                 
-            
-            
         </View> 
         
     )
@@ -63,6 +60,14 @@ export default function ToDo2() {
 
        //setTxt(String(state.isCompleted))
        
+    }
+    function _startEditing(){
+        setEditing(true);
+        setTodoValue(props.text)
+        
+    }
+    function _endEditing(){
+        setEditing(false);
     }
     function _cc(){
         alert(1)
@@ -75,7 +80,8 @@ const styles = StyleSheet.create({
         borderBottomColor:"#bbb",
         borderBottomWidth:StyleSheet.hairlineWidth,
         flexDirection:"row" ,
-        alignItems:"center"
+        alignItems:"center",
+        justifyContent:"space-between"
         
 
         
@@ -114,8 +120,22 @@ const styles = StyleSheet.create({
     column:{
         flexDirection:"row",
         alignItems:"center",
+     //   width:width/2,
         justifyContent:"space-between"
+    },
+    actions:{
+        flexDirection:"row"
+    },
+    actionContainer:{
+        marginHorizontal:10,
+        marginVertical:10
+
+    },
+    actionText:{
+        fontSize:30
     }
+    
+    
     
 })
 

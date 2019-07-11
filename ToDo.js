@@ -4,53 +4,52 @@ const {height, width} = Dimensions.get("window");
 export default class Todo extends Component{
     state={
         isEditing:false,
-        isCompleted:false
+        isCompleted:false,
+        todoValue:""
     }
     render(){
         const {isCompleted, isEditing}= this.state;
+        const {text} = this.props;
         return(
             <View style={styles.container}>
             
-                
-                    <View style={styles.column}>
-                        <TouchableOpacity onPress={this._completeTodoToggle}>
-                        <View style={[styles.circle , isCompleted?styles.completedCircle:styles.uncompletedCircle]} ></View>
-                        </TouchableOpacity>
-                        <Text style={[styles.text, isCompleted?styles.completedText:styles.uncompletedText]} >Hello Im toDo/compo.{String(isCompleted)}</Text>
-                    </View>
-                    <View style={styles.column}>
-                        {isEditing?(
-                            <View style={styles.actions}>
-                                <TouchableOpacity>
-                                    <View style={styles.actionContainer}>
-                                        <Text style={styles.actionText}>☑</Text>
-                                    </View>
-                                </TouchableOpacity>
-                            </View>
-                        
-
-                        ):(
-                            <View style={styles.actions}>
-                                <TouchableOpacity>
-                                    <View style={styles.actionContainer}>
-                                        <Text style={styles.actionText}>✎</Text>
-                                    </View>
-                                </TouchableOpacity>
-                           
-                             <TouchableOpacity>
-                                 <View style={styles.actionContainer}>
-                                     <Text style={styles.actionText}>×</Text>
-                                 </View>
-                             </TouchableOpacity>
-                         </View>
-                        )}
-                    </View>
-
+            
+                <View style={styles.column}>
+                    <TouchableOpacity onPress={this._completeTodoToggle}>
+                        <View style={[styles.circle , isCompleted?styles.completedCircle:styles.uncompletedCircle]} >
+                        </View>
+                    </TouchableOpacity>
+                    <Text style={[styles.text, isCompleted?styles.completedText:styles.uncompletedText]} >{text}</Text>
+                </View>
+                <View style={styles.column}>
+                    {isEditing?(
+                        <View style={styles.actions}>
+                            <TouchableOpacity  onPressOut={this._endEditing}>
+                                <View style={styles.actionContainer}>
+                                    <Text style={styles.actionText}>☑</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
                     
-                 
-            
-            
-        </View> 
+
+                    ):(
+                        <View style={styles.actions}>
+                            <TouchableOpacity onPressOut={this._startEditing}>
+                                <View style={styles.actionContainer}>
+                                    <Text style={styles.actionText}>✎</Text>
+                                </View>
+                            </TouchableOpacity>
+                        
+                            <TouchableOpacity>
+                                <View style={styles.actionContainer}>
+                                    <Text style={styles.actionText}>×</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    )}
+                </View>
+
+            </View> 
 
         )
         
@@ -63,15 +62,30 @@ export default class Todo extends Component{
             }
         })
      }
+     _startEditing =()=>{
+        const {text} = this.props;
+        this.setState({
+            isEditing:true,
+            todoValue:text
+        })
+     }
+     _endEditing =() =>{
+        this.setState({
+            isEditing:false
+        })
+
+     }
 }
 const styles = StyleSheet.create({
     container:{
         width:width - 50,
         borderBottomColor:"#bbb",
         borderBottomWidth:StyleSheet.hairlineWidth,
-        flexDirection:"row", 
+        flexDirection:"row" ,
+        alignItems:"center",
+        justifyContent:"space-between"
+        
 
-        alignItems:"center"
         
     },
     circle:{
@@ -79,7 +93,7 @@ const styles = StyleSheet.create({
         height:30,
         borderRadius:15,
         
-        borderColor:"red",
+        
         borderWidth:5,
         marginRight:20
 
@@ -99,9 +113,30 @@ const styles = StyleSheet.create({
     },
     completedText:{
         textDecorationLine:"line-through",
-        fontStyle: 'italic'
+        fontStyle: 'italic',
+        color:"#bbb"
     },
     uncompletedText:{
 
+    },
+    column:{
+        flexDirection:"row",
+        alignItems:"center",
+        width:width/2,
+        justifyContent:"space-between"
+    },
+    actions:{
+        flexDirection:"row"
+    },
+    actionContainer:{
+        marginHorizontal:10,
+        marginVertical:10
+
+    },
+    actionText:{
+        fontSize:30
     }
+    
+    
+    
 })

@@ -23,8 +23,8 @@ export default function App() {
 				autoCorrect={false}
 			  ></TextInput>
 				<ScrollView contentContainerStyle={styles.todos}>
-					<ToDo2/>
-					<ToDo/>
+					<ToDo2 text={"hello~~"} text2={"world~~"}/>
+					<ToDo text={"hello~~"}/>
 				</ScrollView>
 				 
 				 
