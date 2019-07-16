@@ -20,9 +20,14 @@ export default function ToDo2(props) {
                             <View style={[styles.circle , isCompleted?styles.completedCircle:styles.uncompletedCircle]} >
                             </View>
                         </TouchableOpacity>
-                        <Text style={[styles.text, isCompleted?styles.completedText:styles.uncompletedText]} >{text}{text2}  {String(isCompleted)}</Text>
+                        
+                        {isEditing?(
+                        <TextInput style={[styles.input, styles.text]} value={todoValue} multiline={true}></TextInput>
+                        ):(
+                        <Text style={[styles.text, isCompleted?styles.completedText:styles.uncompletedText]} >{text}  </Text>
+                        )}
                     </View>
-                    <View style={styles.column}>
+                     
                         {isEditing?(
                             <View style={styles.actions}>
                                 <TouchableOpacity  onPressOut={_endEditing}>
@@ -48,7 +53,7 @@ export default function ToDo2(props) {
                              </TouchableOpacity>
                          </View>
                         )}
-                    </View>
+                     
 
         </View> 
         
@@ -133,6 +138,11 @@ const styles = StyleSheet.create({
     },
     actionText:{
         fontSize:30
+    },input:{
+        marginVertical:15
+
+
+
     }
     
     
